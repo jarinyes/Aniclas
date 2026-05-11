@@ -1,0 +1,32 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AniClass: Animal Classification Adventure</title>
+    <script>
+      // Suppress benign Vite WebSocket errors in the AI Studio environment
+      (function() {
+        const ignorePatterns = ['WebSocket', 'vite', 'hmr'];
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && ignorePatterns.some(p => String(event.reason.message || event.reason).includes(p))) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+        window.addEventListener('error', function(event) {
+          if (ignorePatterns.some(p => String(event.message || event.error).includes(p))) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

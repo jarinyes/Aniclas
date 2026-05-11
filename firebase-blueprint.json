@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user progress and details.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The user's unique ID." },
+        "username": { "type": "string", "description": "The user's chosen display name." },
+        "points": { "type": "integer", "description": "The total points earned by the user." },
+        "level": { "type": "integer", "description": "The current level reached by the user." },
+        "achievements": { "type": "array", "items": { "type": "string" }, "description": "List of achievement IDs earned." },
+        "lastActive": { "type": "string", "format": "date-time", "description": "The last time the user was active." }
+      },
+      "required": ["uid", "username", "points", "level"]
+    },
+    "LeaderboardEntry": {
+      "title": "Leaderboard Entry",
+      "description": "A summary of user scores for the leaderboard.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The user's unique ID." },
+        "username": { "type": "string", "description": "The user's display name." },
+        "points": { "type": "integer", "description": "The total points earned." },
+        "level": { "type": "integer", "description": "The current level." }
+      },
+      "required": ["uid", "username", "points", "level"]
+    },
+    "Lesson": {
+      "title": "Lesson",
+      "description": "Educational content for an environment.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "environment": { "type": "string" }
+      },
+      "required": ["title", "content", "environment"]
+    },
+    "Quiz": {
+      "title": "Quiz",
+      "description": "A quiz question.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "question": { "type": "string" },
+        "options": { "type": "array", "items": { "type": "string" } },
+        "correct_answer": { "type": "string" },
+        "category": { "type": "string" }
+      },
+      "required": ["question", "options", "correct_answer", "category"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "The user's individual profile."
+    },
+    "/leaderboard/{userId}": {
+      "schema": "LeaderboardEntry",
+      "description": "The user's entry in the global leaderboard."
+    },
+    "/lessons/{lessonId}": {
+      "schema": "Lesson",
+      "description": "Educational lessons."
+    },
+    "/quizzes/{quizId}": {
+      "schema": "Quiz",
+      "description": "Quiz questions."
+    }
+  }
+}
